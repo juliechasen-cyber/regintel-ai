@@ -1,0 +1,41 @@
+# --- Secrets: never commit ---
+.env
+.env.local
+*.key
+
+# --- Source documents and derived index ---
+# Regulator PDFs are public but large; the repo stays code-only and the
+# downloader rebuilds the corpus. data/sources.json IS tracked (see negation).
+data/pdfs/
+data/chroma/
+data/*.sqlite3
+!data/sources.json
+
+# --- Evaluation output ---
+eval/results/
+*.eval.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# --- Editors / OS ---
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# --- Streamlit ---
+.streamlit/secrets.toml

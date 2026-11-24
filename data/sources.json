@@ -1,0 +1,92 @@
+[
+  {
+    "filename": "ffiec-customer-identification-program.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Customer Identification Program",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "February 2021",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/06_AssessingComplianceWithBSARegulatoryRequirements/01.pdf"
+  },
+  {
+    "filename": "ffiec-customer-due-diligence.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Customer Due Diligence",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2018 section; verify current status",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/06_AssessingComplianceWithBSARegulatoryRequirements/02.pdf"
+  },
+  {
+    "filename": "ffiec-suspicious-activity-reporting.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Suspicious Activity Reporting",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2014 section; FFIEC page notes later SAR FAQs, including October 2025",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/06_AssessingComplianceWithBSARegulatoryRequirements/04.pdf"
+  },
+  {
+    "filename": "ffiec-bsa-aml-risk-assessment.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Risk Assessment",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2020",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/03_BSAAMLRiskAssessment/01.pdf"
+  },
+  {
+    "filename": "ffiec-assessing-bsa-aml-compliance-program.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Assessing the BSA/AML Compliance Program",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2020",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/01.pdf"
+  },
+  {
+    "filename": "ffiec-bsa-aml-internal-controls.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Internal Controls",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2020",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/02.pdf"
+  },
+  {
+    "filename": "ffiec-bsa-aml-independent-testing.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Independent Testing",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2020",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/03.pdf"
+  },
+  {
+    "filename": "ffiec-bsa-compliance-officer.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — BSA Compliance Officer",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2020",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/04.pdf"
+  },
+  {
+    "filename": "ffiec-bsa-aml-training.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Training",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "2020",
+    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/05.pdf"
+  },
+  {
+    "filename": "fincen-cdd-rule-consolidated-faqs.pdf",
+    "title": "FinCEN CDD Rule Consolidated FAQs",
+    "regulator": "FinCEN",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Guidance / FAQs",
+    "publication_date": "Updated May 6, 2026",
+    "source_url": "https://www.fincen.gov/system/files/2026-05/CDD-Rule-Consolidated-FAQs.pdf"
+  }
+]

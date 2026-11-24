@@ -1,0 +1,151 @@
+{
+  "_README": [
+    "Evaluation dataset for RegIntel AI.",
+    "",
+    "GROUND TRUTH POLICY: the 'relevant' field must be filled by a compliance",
+    "subject-matter expert who has read the cited pages. It is shipped EMPTY on",
+    "purpose. Retrieval metrics only count questions that have ground truth; the",
+    "rest are reported as 'skipped_no_ground_truth' rather than scored, so an",
+    "unlabelled dataset can never produce a flattering fake score.",
+    "",
+    "To label: run `python eval/label_helper.py` — it prints the passages the",
+    "retriever returns for each question with their doc_id and page numbers, so a",
+    "reviewer can confirm which are genuinely responsive and paste them in.",
+    "",
+    "Fill 'relevant' as: [{\"doc_id\": \"fincen-cdd-rule-consolidated-faqs\", \"pages\": [6, 8]}]",
+    "",
+    "The 'refusal' cases below need no page labels: they test that the system says",
+    "the evidence is insufficient instead of answering from model memory."
+  ],
+
+  "answerable": [
+    {
+      "id": "cdd-beneficial-owner-threshold",
+      "question": "What ownership percentage makes someone a beneficial owner of a legal entity customer under the CDD Rule?",
+      "topic": "beneficial ownership",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cdd-legal-entity-customer-definition",
+      "question": "How does the CDD Rule define a legal entity customer?",
+      "topic": "beneficial ownership",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cdd-existing-customer-refresh",
+      "question": "Must a covered financial institution update beneficial ownership information for existing customers at account renewal?",
+      "topic": "ongoing monitoring",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cdd-trust-beneficial-owner",
+      "question": "Who is treated as the beneficial owner when a trust owns 25% or more of a legal entity customer?",
+      "topic": "beneficial ownership",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cdd-sole-proprietorship",
+      "question": "Are sole proprietorships and unincorporated associations treated as legal entity customers?",
+      "topic": "scope and exclusions",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cdd-certification-form",
+      "question": "Is a covered financial institution required to use a specific certification form to collect beneficial ownership information?",
+      "topic": "collection mechanics",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cdd-reliance-on-customer",
+      "question": "May an institution rely on information the customer supplies about its beneficial owners?",
+      "topic": "verification",
+      "relevant": [],
+      "ground_truth_status": "unlabelled"
+    },
+    {
+      "id": "cip-identity-verification-elements",
+      "question": "What identifying information must a bank collect under a Customer Identification Program?",
+      "topic": "CIP",
+      "relevant": [],
+      "ground_truth_status": "unlabelled",
+      "requires_document": "ffiec-customer-identification-program"
+    },
+    {
+      "id": "sar-filing-obligation",
+      "question": "When is a bank required to file a suspicious activity report?",
+      "topic": "SAR",
+      "relevant": [],
+      "ground_truth_status": "unlabelled",
+      "requires_document": "ffiec-suspicious-activity-reporting"
+    },
+    {
+      "id": "bsa-officer-responsibilities",
+      "question": "What are the responsibilities of a BSA compliance officer?",
+      "topic": "program governance",
+      "relevant": [],
+      "ground_truth_status": "unlabelled",
+      "requires_document": "ffiec-bsa-compliance-officer"
+    },
+    {
+      "id": "independent-testing-frequency",
+      "question": "How should independent testing of a BSA/AML compliance program be scoped and who may perform it?",
+      "topic": "program governance",
+      "relevant": [],
+      "ground_truth_status": "unlabelled",
+      "requires_document": "ffiec-bsa-aml-independent-testing"
+    },
+    {
+      "id": "risk-assessment-components",
+      "question": "What should a BSA/AML risk assessment consider?",
+      "topic": "risk assessment",
+      "relevant": [],
+      "ground_truth_status": "unlabelled",
+      "requires_document": "ffiec-bsa-aml-risk-assessment"
+    }
+  ],
+
+  "refusal": [
+    {
+      "id": "refusal-out-of-scope-tax",
+      "question": "What is the current federal corporate income tax rate?",
+      "why": "Tax rates are outside a BSA/AML corpus; answering would mean drawing on model memory.",
+      "expected_refusal": true
+    },
+    {
+      "id": "refusal-out-of-scope-capital",
+      "question": "What is the Basel III minimum common equity tier 1 capital ratio?",
+      "why": "Capital adequacy is a different regulatory domain and is not in this corpus.",
+      "expected_refusal": true
+    },
+    {
+      "id": "refusal-future-event",
+      "question": "What BSA/AML rule changes will FinCEN finalize next year?",
+      "why": "Speculative and unknowable; must not be answered from any document.",
+      "expected_refusal": true
+    },
+    {
+      "id": "refusal-specific-institution",
+      "question": "How many SARs did JPMorgan Chase file last quarter?",
+      "why": "Institution-specific operational data is not in a regulatory corpus.",
+      "expected_refusal": true
+    },
+    {
+      "id": "refusal-legal-advice",
+      "question": "Should my bank close this particular customer's account to avoid liability?",
+      "why": "Requests legal advice about a specific situation rather than sourced research.",
+      "expected_refusal": true
+    },
+    {
+      "id": "refusal-unrelated-domain",
+      "question": "What are the HIPAA requirements for protecting patient health records?",
+      "why": "Healthcare privacy law is entirely outside the ingested corpus.",
+      "expected_refusal": true
+    }
+  ]
+}

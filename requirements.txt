@@ -1,0 +1,22 @@
+# RegIntel AI dependencies.
+#
+# Everything here is free and open source except the Anthropic API, which is
+# usage-billed. Retrieval, ingestion, chunking and embedding all run locally at
+# no cost; only answer generation calls a paid API.
+
+# --- Core RAG stack ---
+pymupdf>=1.24            # PDF text extraction with page numbers
+sentence-transformers>=3.0  # local embedding models (pulls in torch)
+chromadb>=0.5            # persistent local vector store
+anthropic>=0.40          # official Claude SDK (answer generation)
+
+# --- Interface ---
+streamlit>=1.38
+
+# --- Support ---
+numpy>=1.26
+python-dotenv>=1.0       # load .env for configuration
+certifi>=2024.0          # CA bundle, so HTTPS source downloads work
+
+# --- Development ---
+pytest>=8.0
