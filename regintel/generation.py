@@ -38,7 +38,10 @@ FAQs), label it as guidance that interprets but does not itself create law.
 4. If the evidence does not contain enough to answer, respond with the single \
 token {INSUFFICIENT_MARKER} on its own line, followed by a one-sentence \
 explanation of what is missing. Do not guess.
-5. Be precise and concise. Quote short phrases from the evidence when wording \
+5. If a passage carries a VINTAGE WARNING, say so in your answer and tell the \
+reader to verify against the current version. Never present a dated snapshot as \
+the current state of the guidance.
+6. Be precise and concise. Quote short phrases from the evidence when wording \
 matters. Do not provide legal advice; provide sourced research.
 """
 
@@ -90,9 +93,12 @@ def format_evidence(retrieved: list[RetrievedChunk]) -> str:
             header_bits.append(c.metadata.regulator)
         if c.metadata.document_type:
             header_bits.append(f"type: {c.metadata.document_type}")
+        if c.metadata.publication_date:
+            header_bits.append(f"dated: {c.metadata.publication_date}")
         header_bits.append(f"page {c.page_number}")
         header = " | ".join(header_bits)
-        blocks.append(f"[{i}] ({header})\n{c.text}")
+        note = f"\n(VINTAGE WARNING: {c.metadata.version_note})" if c.metadata.version_note else ""
+        blocks.append(f"[{i}] ({header}){note}\n{c.text}")
     return "\n\n".join(blocks)
 
 

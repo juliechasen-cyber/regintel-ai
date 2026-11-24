@@ -79,18 +79,34 @@ def _header_signature(line: str) -> str:
     return _DIGITS_RE.sub("", despace_letters(line)).lower().strip(" -—–\t")
 
 
-#: How many lines at the top and bottom of a page can be a running header/footer.
-_EDGE_LINES = 2
+#: Lines at the top of a page that can be a running header.
+_EDGE_TOP = 3
+#: Lines at the bottom that can be a running footer. Deliberately larger than
+#: _EDGE_TOP: printed-register footers are multi-line blocks. GPO's CFR PDFs end
+#: every page with ~9 typesetting artifacts ("Frm 01201", "Fmt 8010",
+#: "Sfmt 8010", "Y:\\SGML\\265133.XXX", a jobfile id and an operator name).
+#: Frequency and length remain the real guards; position is a cheap prefilter.
+_EDGE_BOTTOM = 12
 #: A running banner is short. Longer repeated lines are treated as body text.
 _MAX_HEADER_CHARS = 60
 _MAX_HEADER_WORDS = 8
 
 
 def _edge_indices(n_lines: int) -> set[int]:
-    """Line positions eligible to be a header/footer: the page's top and bottom."""
-    if n_lines <= 2 * _EDGE_LINES:
+    """Line positions eligible to be a header/footer: the page's top and bottom.
+
+    The windows are capped proportionally so a middle band is always reserved.
+    Without that cap, a short page would be entirely "edge" and mid-page text
+    would lose its position protection — the windows are sized for dense printed
+    pages, not for a 5-line one.
+    """
+    if n_lines <= 2:
         return set(range(n_lines))
-    return set(range(_EDGE_LINES)) | set(range(n_lines - _EDGE_LINES, n_lines))
+    top = min(_EDGE_TOP, max(1, n_lines // 4))
+    bottom = min(_EDGE_BOTTOM, max(1, n_lines // 3))
+    if top + bottom >= n_lines:  # guarantee at least one protected middle line
+        top, bottom = 1, 1
+    return set(range(top)) | set(range(n_lines - bottom, n_lines))
 
 
 def _header_candidate(line: str) -> bool:
@@ -201,6 +217,7 @@ def _metadata_from_pdf(pdf_meta: dict, sidecar: dict) -> DocumentMetadata:
         publication_date=pick("publication_date", "creationDate", "CreationDate"),
         document_type=doc_type,
         source_url=pick("source_url", "url"),
+        version_note=pick("version_note"),
     )
 
 

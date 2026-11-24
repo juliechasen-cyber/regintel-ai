@@ -39,12 +39,22 @@ class DocumentMetadata:
     publication_date: Optional[str] = None   # ISO 8601 string when known
     document_type: Optional[str] = None       # one of DOCUMENT_TYPES
     source_url: Optional[str] = None
+    # Vintage warning. Set when the indexed text is a dated snapshot that a later
+    # revision may have superseded (e.g. an examination-manual section captured
+    # from an agency letter). Surfaced on every citation: a compliance answer
+    # must never present guidance of unknown vintage as current.
+    version_note: Optional[str] = None
     extra: dict[str, Any] = field(default_factory=dict)
+
+    _STORED_FIELDS = (
+        "title", "regulator", "publication_date", "document_type",
+        "source_url", "version_note",
+    )
 
     def as_filter_dict(self) -> dict[str, Any]:
         """Metadata flattened for the vector store (only non-null scalars)."""
         out: dict[str, Any] = {}
-        for key in ("title", "regulator", "publication_date", "document_type", "source_url"):
+        for key in self._STORED_FIELDS:
             value = getattr(self, key)
             if value is not None:
                 out[key] = value
@@ -135,11 +145,14 @@ class Citation:
     page_number: int
     document_type: Optional[str] = None
     source_url: Optional[str] = None
+    publication_date: Optional[str] = None
+    version_note: Optional[str] = None
 
     def human_label(self) -> str:
         title = self.title or self.doc_id
         reg = f"{self.regulator}, " if self.regulator else ""
-        return f"{title} ({reg}p. {self.page_number})"
+        date = f", {self.publication_date}" if self.publication_date else ""
+        return f"{title} ({reg}p. {self.page_number}{date})"
 
 
 @dataclass(frozen=True)

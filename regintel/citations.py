@@ -38,6 +38,8 @@ def build_citations(retrieved: Iterable[RetrievedChunk]) -> list[Citation]:
                 page_number=c.page_number,
                 document_type=c.metadata.document_type,
                 source_url=c.metadata.source_url,
+                publication_date=c.metadata.publication_date,
+                version_note=c.metadata.version_note,
             )
         )
     return citations
@@ -79,4 +81,6 @@ def format_sources_block(citations: list[Citation]) -> str:
     for c in citations:
         url = f" — {c.source_url}" if c.source_url else ""
         lines.append(f"{c.marker} {c.human_label()}{url}")
+        if c.version_note:
+            lines.append(f"     ! {c.version_note}")
     return "\n".join(lines)

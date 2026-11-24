@@ -152,7 +152,7 @@ eval/
   label_helper.py        Surfaces candidate passages for a reviewer to label
 scripts/
   fetch_sources.py   Download source PDFs + write metadata sidecars
-tests/               109 tests
+tests/               118 tests
 docs/                architecture, rag_pipeline, evaluation, business_case
 ```
 
@@ -172,13 +172,14 @@ Stated precisely, because "it works" is not a claim worth making loosely:
 
 | Component | Status |
 |---|---|
-| Chunking, citations, retrieval ranking, dedup, eval metrics | **Verified** — 109 passing tests |
+| Chunking, citations, retrieval ranking, dedup, eval metrics | **Verified** — 118 passing tests |
 | PDF ingestion (PyMuPDF 2.1) | **Verified against a real document** — FinCEN CDD FAQs, 24 pages → 42 chunks, page numbers exact |
 | ChromaDB persistence + cross-process dedup | **Verified** — ChromaDB 1.5.9; re-ingest adds 0 chunks |
 | Metadata filtering | **Verified** — `--regulator FinCEN` returns results, `--regulator OCC` correctly returns none |
-| Running-header removal | **Verified** — FinCEN page banners no longer pollute chunk text |
-| Claude generation | **Logic tested with a fake client.** Prompt construction, insufficient-evidence handling and citation validation are covered by tests. **No live API call has been made in this build**, so live answer quality is unmeasured. |
-| Sentence Transformers embeddings | **Not yet exercised.** `sentence-transformers` was not installed during the build, so retrieval above ran on the offline hashing embedder. Install it for real semantic quality — scores shown in testing are not representative. |
+| Running-header removal | **Verified** — FinCEN letter-spaced banners and GPO's 9-line CFR typesetting footers (`Sfmt 8010`, `Y:\SGML\...`) are both stripped, with body text intact |
+| Claude generation | **Logic tested with a fake client.** Prompt construction, insufficient-evidence handling, vintage disclosure and citation validation are covered by tests. **No live API call has been made in this build**, so live answer quality is unmeasured. |
+| Sentence Transformers embeddings | **Verified** — `all-MiniLM-L6-v2`, 384 dimensions, 229 pages embedded in ~11s on CPU. Semantic retrieval confirmed: the query "senior foreign political figures" retrieves the *Politically Exposed Persons* section despite zero shared vocabulary. |
+| Document vintage disclosure | **Verified** — every citation carries its publication date, and dated snapshots emit a warning through the sources block, the UI and the model prompt. |
 | Streamlit UI | **Runs clean** — Streamlit 1.67; app serves HTTP 200 headless and the full script body executes without error. Not yet click-tested in a browser by a human. |
 | Evaluation harness | **Runs** — `evaluate_retrieval.py` and `label_helper.py` execute against the real index. With no labels present the harness correctly reports `n/a` rather than a score. |
 
@@ -218,8 +219,15 @@ Only generation costs money. `search`, `ingest` and
   cited source before relying on anything.
 - **Answers are bounded by the corpus.** If a document isn't ingested, the right
   answer is "insufficient evidence" — and that is the intended behaviour.
-- **Currency is the user's responsibility.** Regulations change; the index is a
-  snapshot. `publication_date` is shown as supplied so staleness is visible.
+- **Currency is disclosed, not guaranteed.** Regulations and guidance change; the
+  index is a snapshot. Every citation shows its `publication_date`, and documents
+  known to be dated snapshots carry a `version_note` that is surfaced in the
+  sources list, the UI and the prompt — the model is instructed to tell the reader
+  to verify against the current version. The FFIEC manual sections in the default
+  corpus are 2021 and 2023 snapshots taken from FDIC letters; FFIEC last revised
+  the manual on 2026-02-27, so **treat them as potentially superseded.** The
+  current text is only on the Cloudflare-blocked InfoBase, which must be fetched
+  in a browser.
 - **Page-bounded chunks** can split an obligation that straddles a page break.
   The trade-off buys exact citations; set `REGINTEL_RESPECT_PAGES=0` to prefer
   continuity over page precision.

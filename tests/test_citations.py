@@ -104,3 +104,41 @@ def test_format_sources_block_renders_markers_and_urls():
 
 def test_format_sources_block_handles_empty():
     assert format_sources_block([]) == "No sources cited."
+
+
+# ------------------------------------------------------ document vintage (staleness)
+
+def _dated_retrieved(version_note=None, pub_date="February 2021"):
+    chunk = Chunk(
+        doc_id="ffiec-cip", chunk_index=0, page_number=3, text="manual text",
+        metadata=DocumentMetadata(
+            title="FFIEC Manual — CIP", regulator="FFIEC",
+            document_type="supervisory_guidance",
+            publication_date=pub_date, version_note=version_note,
+        ),
+    )
+    return [RetrievedChunk(chunk=chunk, score=0.9, rank=0)]
+
+
+def test_citation_carries_publication_date_and_version_note():
+    note = "Snapshot dated February 2021; verify against the current InfoBase."
+    c = build_citations(_dated_retrieved(note))[0]
+    assert c.publication_date == "February 2021"
+    assert c.version_note == note
+
+
+def test_human_label_includes_the_date():
+    c = build_citations(_dated_retrieved())[0]
+    assert "February 2021" in c.human_label()
+    assert "p. 3" in c.human_label()
+
+
+def test_sources_block_surfaces_the_vintage_warning():
+    note = "THIS TEXT IS LIKELY SUPERSEDED - check the current InfoBase."
+    block = format_sources_block(build_citations(_dated_retrieved(note)))
+    assert "LIKELY SUPERSEDED" in block, "a stale-document warning must be shown"
+
+
+def test_sources_block_has_no_warning_line_when_document_is_current():
+    block = format_sources_block(build_citations(_dated_retrieved(None)))
+    assert "!" not in block

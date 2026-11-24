@@ -105,7 +105,8 @@ class InMemoryVectorStore:
                 continue
             entry = docs.setdefault(doc_id, {"chunks": 0})
             entry["chunks"] += 1
-            for key in ("title", "regulator", "document_type", "publication_date", "source_url"):
+            for key in ("title", "regulator", "document_type", "publication_date",
+                        "source_url", "version_note"):
                 if key in meta and key not in entry:
                     entry[key] = meta[key]
         return docs
@@ -180,7 +181,8 @@ class ChromaVectorStore:
                 continue
             entry = docs.setdefault(doc_id, {"chunks": 0})
             entry["chunks"] += 1
-            for key in ("title", "regulator", "document_type", "publication_date", "source_url"):
+            for key in ("title", "regulator", "document_type", "publication_date",
+                        "source_url", "version_note"):
                 if key in meta and key not in entry:
                     entry[key] = meta[key]
         return docs
@@ -201,6 +203,7 @@ def _chunk_from_store(text: str, meta: dict[str, Any]) -> Chunk:
             publication_date=meta.get("publication_date"),
             document_type=meta.get("document_type"),
             source_url=meta.get("source_url"),
+            version_note=meta.get("version_note"),
         ),
     )
 

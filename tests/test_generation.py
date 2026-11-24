@@ -143,3 +143,34 @@ def test_answer_to_dict_is_serializable():
     answer = gen.generate("q", _retrieved(2))
     payload = json.dumps(answer.to_dict())
     assert "citations" in payload and "retrieved" in payload
+
+
+# ------------------------------------------------------------- document vintage
+
+def _retrieved_with_note(note="Snapshot dated July 2023; may be superseded."):
+    chunk = Chunk(
+        doc_id="ffiec-x", chunk_index=0, page_number=4, text="A bank shall do X.",
+        metadata=DocumentMetadata(
+            title="FFIEC Manual — X", regulator="FFIEC",
+            publication_date="July 2023", version_note=note,
+        ),
+    )
+    return [RetrievedChunk(chunk=chunk, score=0.9, rank=0)]
+
+
+def test_prompt_requires_disclosing_a_vintage_warning():
+    sp = build_system_prompt()
+    assert "VINTAGE WARNING" in sp
+    assert "current version" in sp
+
+
+def test_evidence_block_shows_date_and_vintage_warning_to_the_model():
+    text = format_evidence(_retrieved_with_note())
+    assert "dated: July 2023" in text
+    assert "VINTAGE WARNING" in text
+    assert "may be superseded" in text
+
+
+def test_evidence_block_omits_warning_for_current_documents():
+    text = format_evidence(_retrieved_with_note(None))
+    assert "VINTAGE WARNING" not in text

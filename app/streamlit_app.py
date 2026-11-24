@@ -134,6 +134,8 @@ with tab_research:
                 )
                 if meta_line:
                     st.caption(meta_line)
+                if c.metadata.version_note:
+                    st.warning(c.metadata.version_note, icon=":material/history:")
                 st.write(c.text)
                 if c.metadata.source_url:
                     st.markdown(f"[Open source document]({c.metadata.source_url})")
@@ -157,6 +159,8 @@ with tab_research:
                 if c.document_type:
                     line += f" — _{c.document_type}_"
                 st.markdown(line)
+                if c.version_note:
+                    st.warning(c.version_note, icon=":material/history:")
                 if c.source_url:
                     st.caption(c.source_url)
         else:
@@ -202,6 +206,7 @@ with tab_library:
                 "type": info.get("document_type") or "(unknown)",
                 "date": info.get("publication_date") or "(unknown)",
                 "chunks": info.get("chunks", 0),
+                "vintage warning": "yes" if info.get("version_note") else "",
                 "source": info.get("source_url") or "",
             })
         st.dataframe(rows, width="stretch", hide_index=True)

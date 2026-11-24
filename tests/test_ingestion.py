@@ -171,3 +171,40 @@ def test_letter_spaced_running_header_is_removed():
     for page in cleaned:
         assert "F I N C E N" not in page.text
         assert f"Body prose for page {page.page_number}" in page.text
+
+
+# ------------------------------------------------- edge window sizing (regression)
+
+def test_edge_window_always_reserves_a_middle_band():
+    # Regression: the footer window was widened for dense printed pages (GPO CFR
+    # footers run ~9 lines). On short pages that swallowed everything, so
+    # mid-page text lost its position protection.
+    from regintel.ingestion import _edge_indices
+    for n in range(3, 40):
+        edges = _edge_indices(n)
+        assert len(edges) < n, f"page of {n} lines left no protected middle"
+    # Dense page: the footer window must still be wide enough for GPO junk.
+    dense = _edge_indices(48)
+    assert 47 in dense and 40 in dense, "footer window too narrow for printer blocks"
+    assert 20 not in dense, "mid-page line must not be an edge candidate"
+
+
+def test_gpo_style_footer_block_is_removed():
+    # Nine-line typesetting footer, as GPO's CFR PDFs emit.
+    body = [f"regulatory body text line {i} with sufficient words to be prose"
+            for i in range(14)]
+    pages = []
+    for p in range(1, 9):
+        pages.append(Page(p, "\n".join(
+            [f"{1190 + p}", "Financial Crimes Enforc. Network, Treas."]
+            + body
+            + ["VerDate Sep<11>2014", "Jkt 265133", "PO 00000",
+               f"Frm 0120{p}", "Fmt 8010", "Sfmt 8010",
+               "Y:\\SGML\\265133.XXX", "265133",
+               "skersey on DSK4WB1RN3PROD with CFR"]
+        )))
+    cleaned = strip_repeated_lines(pages)
+    for page in cleaned:
+        for junk in ("Sfmt", "Fmt 8010", "PO 00000", "SGML", "DSK4WB1RN3PROD", "Jkt"):
+            assert junk not in page.text, f"{junk!r} survived"
+        assert "regulatory body text line 7" in page.text, "body text was destroyed"
