@@ -1,9 +1,3 @@
----
-noteId: "f56ddee0e84211f192c02f52450d7c90"
-tags: []
-
----
-
 # Business case
 
 > **A note on figures.** This document contains no market-size, cost-saving or

@@ -25,6 +25,7 @@ import streamlit as st
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from regintel.bootstrap import bootstrap_enabled, ensure_corpus  # noqa: E402
 from regintel.citations import format_sources_block  # noqa: E402
 from regintel.config import Config  # noqa: E402
 from regintel.pipeline import build_pipeline  # noqa: E402
@@ -36,10 +37,20 @@ st.set_page_config(page_title="RegIntel AI", page_icon="§", layout="wide")
 @st.cache_resource(show_spinner="Loading embedding model and vector store...")
 def get_pipeline():
     config = Config.from_env()
-    return build_pipeline(config, with_llm=True), config
+    pipeline = build_pipeline(config, with_llm=True)
+
+    # Hosted demos start with an empty disk: the repo is code-only. With
+    # REGINTEL_BOOTSTRAP=1 the app fetches the manifest's documents and builds
+    # its own index on first start. No credentials are involved.
+    report = None
+    if bootstrap_enabled() and pipeline.chunk_count() == 0:
+        status = st.empty()
+        report = ensure_corpus(pipeline, progress=lambda m: status.info(m, icon=":material/cloud_download:"))
+        status.empty()
+    return pipeline, config, report
 
 
-pipeline, config = get_pipeline()
+pipeline, config, boot_report = get_pipeline()
 
 
 # ----------------------------------------------------------------------- sidebar
@@ -63,8 +74,13 @@ with st.sidebar:
                    "Retrieval quality will be poor. "
                    "`pip install sentence-transformers`", icon=":material/warning:")
     if pipeline.generator is None:
-        st.error("No ANTHROPIC_API_KEY — retrieval works, but answers cannot be "
-                 "generated.", icon=":material/warning:")
+        st.info(
+            "**Retrieval-only mode.** No `ANTHROPIC_API_KEY` is configured, so "
+            "answer generation is off. Semantic search over the full corpus "
+            "works normally and costs nothing. This is how the public demo runs "
+            "— so no one can spend an API budget by visiting it.",
+            icon=":material/search:",
+        )
 
     st.subheader("Retrieval")
     top_k = st.slider("Passages to retrieve (k)", 1, 20, config.top_k)

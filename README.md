@@ -1,9 +1,3 @@
----
-noteId: "86edc110e84211f192c02f52450d7c90"
-tags: []
-
----
-
 # RegIntel AI
 
 [![tests](https://github.com/juliechasen-cyber/regintel-ai/actions/workflows/tests.yml/badge.svg)](https://github.com/juliechasen-cyber/regintel-ai/actions/workflows/tests.yml)
@@ -208,7 +202,8 @@ Stated precisely, because "it works" is not a claim worth making loosely:
 | ChromaDB persistence + cross-process dedup | **Verified** — ChromaDB 1.5.9; re-ingest adds 0 chunks |
 | Metadata filtering | **Verified** — `--regulator FinCEN` returns results, `--regulator OCC` correctly returns none |
 | Running-header removal | **Verified** — FinCEN letter-spaced banners and GPO's 9-line CFR typesetting footers (`Sfmt 8010`, `Y:\SGML\...`) are both stripped, with body text intact |
-| Claude generation | **Logic tested with a fake client.** Prompt construction, insufficient-evidence handling, vintage disclosure and citation validation are covered by tests. **No live API call has been made in this build**, so live answer quality is unmeasured. |
+| Claude generation | **Verified live** against the real API (`claude-sonnet-5-5`). A beneficial-ownership question returned a cited answer that correctly labelled its evidence as supervisory guidance rather than binding rule, unprompted. |
+| Refusal behaviour | **Verified live** — `eval/evaluate_answers.py --refusal-only` scored **6/6 refusals correct, 0 invented citations, citation validity 1.0.** Asked the Basel III CET1 ratio, the system declined rather than answering from model memory. |
 | Sentence Transformers embeddings | **Verified** — `all-MiniLM-L6-v2`, 384 dimensions, 229 pages embedded in ~11s on CPU. Semantic retrieval confirmed: the query "senior foreign political figures" retrieves the *Politically Exposed Persons* section despite zero shared vocabulary. |
 | Document vintage disclosure | **Verified** — every citation carries its publication date, and dated snapshots emit a warning through the sources block, the UI and the model prompt. |
 | Streamlit UI | **Runs clean** — Streamlit 1.67; app serves HTTP 200 headless and the full script body executes without error. Not yet click-tested in a browser by a human. |

@@ -1,9 +1,3 @@
----
-noteId: "9c37e370e84211f192c02f52450d7c90"
-tags: []
-
----
-
 # Architecture
 
 ## What this system is, and is not

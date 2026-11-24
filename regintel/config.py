@@ -65,7 +65,7 @@ class Config:
     # Model ids follow the Claude 5 family. Sonnet is a sensible default for
     # grounded Q&A; override with REGINTEL_MODEL.
     anthropic_model: str = "claude-sonnet-5-5"
-    max_tokens: int = 1024
+    max_tokens: int = 2048
     temperature: float = 0.0  # deterministic, grounded answers
 
     @classmethod
@@ -84,6 +84,6 @@ class Config:
             collection_name=_env("REGINTEL_COLLECTION", "regintel"),
             top_k=_env_int("REGINTEL_TOP_K", 6),
             anthropic_model=_env("REGINTEL_MODEL", "claude-sonnet-5-5"),
-            max_tokens=_env_int("REGINTEL_MAX_TOKENS", 1024),
+            max_tokens=_env_int("REGINTEL_MAX_TOKENS", 2048),
             temperature=_env_float("REGINTEL_TEMPERATURE", 0.0),
         )

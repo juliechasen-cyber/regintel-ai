@@ -14,6 +14,7 @@ unit-tested directly.
 
 from __future__ import annotations
 
+import inspect
 from typing import Any, Optional, Protocol
 
 from .citations import build_citations, used_citations
@@ -62,15 +63,33 @@ class AnthropicClient:
 
         self._client = anthropic.Anthropic(api_key=api_key) if api_key else anthropic.Anthropic()
 
+    @staticmethod
+    def _supports_temperature(create) -> bool:
+        """Does this SDK's messages.create accept a ``temperature`` argument?
+
+        The Anthropic SDK dropped ``temperature`` (it is absent in 1.11.0, where
+        ``output_config`` carries ``effort``/``format`` instead). Passing it to a
+        newer SDK raises TypeError, and omitting it on an older one silently
+        loses determinism — so detect rather than assume.
+        """
+        try:
+            return "temperature" in inspect.signature(create).parameters
+        except (TypeError, ValueError):  # pragma: no cover - exotic SDK stubs
+            return False
+
     def create_message(self, *, model: str, system: str, messages: list[dict],
                        max_tokens: int, temperature: float) -> str:
-        resp = self._client.messages.create(
+        create = self._client.messages.create
+        kwargs: dict[str, Any] = dict(
             model=model,
             system=system,
             messages=messages,
             max_tokens=max_tokens,
-            temperature=temperature,
         )
+        if self._supports_temperature(create):
+            kwargs["temperature"] = temperature
+
+        resp = create(**kwargs)
         parts = [b.text for b in resp.content if getattr(b, "type", None) == "text"]
         return "".join(parts).strip()
 

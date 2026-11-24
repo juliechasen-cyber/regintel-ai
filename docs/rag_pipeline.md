@@ -1,9 +1,3 @@
----
-noteId: "c0cad580e84211f192c02f52450d7c90"
-tags: []
-
----
-
 # The RAG pipeline, stage by stage
 
 Each stage below explains *what it does*, *why it's built that way*, and *what
