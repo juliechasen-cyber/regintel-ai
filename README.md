@@ -85,17 +85,48 @@ Check what's actually configured at any time:
 python -m regintel.cli status
 ```
 
-### A note on the source documents
+### The corpus
 
-`data/sources.json` lists 10 public FFIEC and FinCEN documents. The downloader
-fetches what it can; **`bsaaml.ffiec.gov` sits behind a Cloudflare bot challenge
-and refuses automated requests**, so those 9 PDFs must be downloaded in a normal
-browser and saved into `data/pdfs/` using the filenames the script prints. The
-script writes each document's `.meta.json` sidecar either way, so metadata and
-citations are correct as soon as the PDF is in place.
+`data/sources.json` is a manifest of **21 public documents, all fetched
+automatically** by `scripts/fetch_sources.py` — 229 pages, 376 chunks:
 
-PDFs and the vector index are gitignored; the repo stays code-only and the corpus
-is reproducible from the manifest.
+| Source | Type | Docs |
+|---|---|---|
+| 31 CFR Parts 1010 & 1020 (govinfo/GPO, 2025 annual edition) | `regulation` | 2 |
+| FFIEC BSA/AML Examination Manual sections | `supervisory_guidance` | 18 |
+| FinCEN CDD Rule Consolidated FAQs | `supervisory_guidance` | 1 |
+
+This mix is deliberate, and it's what makes the system demonstrable rather than
+merely functional. Two regulators and two document types mean metadata filtering
+does real work, and — because the CFR parts are the *binding rules* while the
+manual sections are *examiner guidance* — the regulation-vs-guidance distinction
+the prompt enforces can actually be exercised:
+
+```bash
+# the binding rule
+python -m regintel.cli search "customer identification program" --document-type regulation
+#   -> 31 CFR Part 1020 — Rules for Banks, page 4
+
+# what examiners look for
+python -m regintel.cli search "customer identification program" --document-type supervisory_guidance
+#   -> FFIEC BSA/AML Examination Manual — Customer Identification Program, page 1
+```
+
+**On sourcing the FFIEC manual.** `bsaaml.ffiec.gov` and `www.ffiec.gov` both sit
+behind a Cloudflare bot challenge (`cf-mitigated: challenge`) and refuse
+automated requests. Rather than work around the challenge, the manifest sources
+the same section PDFs from **the FDIC**, which publishes them as attachments to
+its Financial Institution Letters and permits automated access. Each entry
+carries a `source_note` recording this, so provenance stays honest. Archived
+third-party mirrors of the manual (2005, 2014 editions) were rejected — stale
+text presented as current guidance is worse than a missing document.
+
+Every document's `.meta.json` sidecar is written from the manifest, so titles,
+regulators, dates and source URLs in citations are verified rather than inferred
+from document text.
+
+PDFs and the vector index are gitignored; the repo stays code-only and the whole
+corpus is reproducible from the manifest with one command.
 
 ## Project layout
 

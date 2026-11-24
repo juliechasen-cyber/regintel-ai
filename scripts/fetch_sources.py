@@ -39,6 +39,7 @@ SIDECAR_FIELDS = (
     "document_type_label",
     "publication_date",
     "source_url",
+    "source_note",
 )
 
 

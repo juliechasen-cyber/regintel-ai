@@ -1,84 +1,203 @@
 [
   {
+    "filename": "cfr-31-part-1010.pdf",
+    "title": "31 CFR Part 1010 — General Provisions (Bank Secrecy Act)",
+    "regulator": "FinCEN",
+    "document_type": "regulation",
+    "document_type_label": "Codified regulation (CFR annual edition)",
+    "publication_date": "2025 CFR annual edition (revised as of July 1, 2025)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CFR-2025-title31-vol3/pdf/CFR-2025-title31-vol3-part1010.pdf",
+    "source_note": "Official CFR annual edition from govinfo.gov (GPO)."
+  },
+  {
+    "filename": "cfr-31-part-1020.pdf",
+    "title": "31 CFR Part 1020 — Rules for Banks (Bank Secrecy Act)",
+    "regulator": "FinCEN",
+    "document_type": "regulation",
+    "document_type_label": "Codified regulation (CFR annual edition)",
+    "publication_date": "2025 CFR annual edition (revised as of July 1, 2025)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CFR-2025-title31-vol3/pdf/CFR-2025-title31-vol3-part1020.pdf",
+    "source_note": "Official CFR annual edition from govinfo.gov (GPO)."
+  },
+  {
+    "filename": "ffiec-assessing-compliance-bsa-regulatory-requirements.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Assessing Compliance with BSA Regulatory Requirements",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "February 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21012a.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
     "filename": "ffiec-customer-identification-program.pdf",
     "title": "FFIEC BSA/AML Examination Manual — Customer Identification Program",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
     "publication_date": "February 2021",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/06_AssessingComplianceWithBSARegulatoryRequirements/01.pdf"
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21012b.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-customer-due-diligence.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — Customer Due Diligence",
+    "filename": "ffiec-currency-transaction-reporting.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Currency Transaction Reporting",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2018 section; verify current status",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/06_AssessingComplianceWithBSARegulatoryRequirements/02.pdf"
+    "publication_date": "February 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21012c.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-suspicious-activity-reporting.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — Suspicious Activity Reporting",
+    "filename": "ffiec-transactions-of-exempt-persons.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Transactions of Exempt Persons",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2014 section; FFIEC page notes later SAR FAQs, including October 2025",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/06_AssessingComplianceWithBSARegulatoryRequirements/04.pdf"
+    "publication_date": "February 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21012d.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-bsa-aml-risk-assessment.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Risk Assessment",
+    "filename": "ffiec-monetary-instruments-recordkeeping.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Purchase and Sale of Monetary Instruments Recordkeeping",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2020",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/03_BSAAMLRiskAssessment/01.pdf"
+    "publication_date": "June 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21045a.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-assessing-bsa-aml-compliance-program.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — Assessing the BSA/AML Compliance Program",
+    "filename": "ffiec-special-measures.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Special Measures",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2020",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/01.pdf"
+    "publication_date": "June 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21045b.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-bsa-aml-internal-controls.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Internal Controls",
+    "filename": "ffiec-reports-of-foreign-financial-accounts.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Reports of Foreign Financial Accounts",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2020",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/02.pdf"
+    "publication_date": "June 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21045c.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-bsa-aml-independent-testing.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Independent Testing",
+    "filename": "ffiec-international-transportation-of-currency.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — International Transportation of Currency or Monetary Instruments Reporting",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2020",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/03.pdf"
+    "publication_date": "June 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21045d.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-bsa-compliance-officer.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — BSA Compliance Officer",
+    "filename": "ffiec-introduction-customers.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Introduction - Customers",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2020",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/04.pdf"
+    "publication_date": "November 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21076b.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
-    "filename": "ffiec-bsa-aml-training.pdf",
-    "title": "FFIEC BSA/AML Examination Manual — BSA/AML Training",
+    "filename": "ffiec-charities-and-nonprofit-organizations.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Charities and Nonprofit Organizations",
     "regulator": "FFIEC",
     "document_type": "supervisory_guidance",
     "document_type_label": "Examination manual section",
-    "publication_date": "2020",
-    "source_url": "https://bsaaml.ffiec.gov/docs/manual/04_AssessingTheBSAAMLComplianceProgram/05.pdf"
+    "publication_date": "November 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21076c.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-independent-atm-owners-operators.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Independent Automated Teller Machine Owners or Operators",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "November 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21076d.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-politically-exposed-persons.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Politically Exposed Persons",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "November 2021",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2021/fil21076e.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-private-banking-due-diligence.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Due Diligence Programs for Private Banking Accounts",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "July 2023",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2023/fil23040a.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-correspondent-accounts-due-diligence.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Due Diligence Programs for Correspondent Accounts for Foreign Financial Institutions",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "July 2023 (FDIC FIL-40-2023 release)",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2023/fil23040b.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-foreign-shell-banks-prohibition.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Prohibition on Correspondent Accounts for Foreign Shell Banks; Records Concerning Owners of Foreign Banks and Agents for Service of Legal Process",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "July 2023 (FDIC FIL-40-2023 release)",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2023/fil23040c.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-iranian-linked-institutions-reporting.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Reporting Obligations on Foreign Bank Relationships with Iranian-Linked Financial Institutions",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "July 2023 (FDIC FIL-40-2023 release)",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2023/fil23040d.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-special-information-sharing.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Special Information Sharing Procedures to Deter Money Laundering and Terrorist Activity",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "July 2023 (FDIC FIL-40-2023 release)",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2023/fil23040e.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
+  },
+  {
+    "filename": "ffiec-summons-subpoena-foreign-bank-records.pdf",
+    "title": "FFIEC BSA/AML Examination Manual — Summons or Subpoena of Foreign Bank Records; Termination of Correspondent Relationship; Records Concerning Owners of Foreign Banks and Agents for Service of Legal Process",
+    "regulator": "FFIEC",
+    "document_type": "supervisory_guidance",
+    "document_type_label": "Examination manual section",
+    "publication_date": "July 2023 (FDIC FIL-40-2023 release)",
+    "source_url": "https://www.fdic.gov/news/financial-institution-letters/2023/fil23040f.pdf",
+    "source_note": "FFIEC manual section as published by the FDIC. bsaaml.ffiec.gov blocks automated requests; the FDIC hosts the same section PDFs."
   },
   {
     "filename": "fincen-cdd-rule-consolidated-faqs.pdf",
