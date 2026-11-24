@@ -106,6 +106,10 @@ with tab_research:
     do_search = col_search.button("Retrieve passages only (free)",
                                   width="stretch")
 
+    # Bound before the branch chain: the render guard below reads it on any path
+    # where do_ask is True, including the early-exit branches.
+    answer = None
+
     if (do_ask or do_search) and not question.strip():
         st.warning("Enter a question first.")
 
@@ -141,9 +145,21 @@ with tab_research:
                     st.markdown(f"[Open source document]({c.metadata.source_url})")
 
     elif do_ask:
-        with st.spinner("Retrieving evidence and generating a grounded answer..."):
-            answer = pipeline.ask(question, top_k=top_k, regulator=regulator,
-                                  document_type=doc_type)
+        try:
+            with st.spinner("Retrieving evidence and generating a grounded answer..."):
+                answer = pipeline.ask(question, top_k=top_k, regulator=regulator,
+                                      document_type=doc_type)
+        except Exception as exc:
+            # An API key that is missing, invalid or out of quota must read as a
+            # clear message, not a Streamlit traceback. Retrieval is unaffected.
+            st.error(
+                f"The answer could not be generated: {type(exc).__name__}: {exc}\n\n"
+                "Check that `ANTHROPIC_API_KEY` in your `.env` is a valid key. "
+                "Retrieval does not need one — use **Retrieve passages only**.",
+                icon=":material/error:",
+            )
+
+    if do_ask and answer is not None:
 
         if answer.insufficient_evidence:
             st.warning("The retrieved evidence does not support an answer. "
@@ -209,7 +225,7 @@ with tab_library:
                 "vintage warning": "yes" if info.get("version_note") else "",
                 "source": info.get("source_url") or "",
             })
-        st.dataframe(rows, width="stretch", hide_index=True)
+        st.dataframe(rows, width="stretch", hide_index=True, height=560)
         st.caption('"(unknown)" means the field was not supplied — RegIntel '
                    "leaves it blank rather than inferring it from the text.")
 
