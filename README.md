@@ -30,11 +30,15 @@ Question ──► Embed ──► Vector search ──► Top-k passages ──
 similarity score, an exact page number, the regulator, the document type and its
 section heading — so any claim can be checked against the text that produced it.*
 
-**Live demo:** not currently deployed. It can be hosted free on Streamlit
-Community Cloud in a few clicks — see [docs/deployment.md](docs/deployment.md).
-The documented deployment runs **retrieval-only, with no API key configured**,
-because a public URL holding an Anthropic key is a public spend endpoint.
-Generation runs locally with your own key in a gitignored `.env`.
+RegIntel runs locally — see [Quick start](#quick-start). Document ingestion,
+chunking, embedding and vector storage all happen on your machine, so no
+document content leaves it; only the question and the retrieved passages reach
+an API, and only at generation time. For an institution evaluating this, that
+property is usually the precondition for any trial.
+
+Hosting it publicly is documented in [docs/deployment.md](docs/deployment.md),
+including why such a deployment should run retrieval-only: a public URL holding
+an Anthropic key is a public spend endpoint.
 
 ---
 

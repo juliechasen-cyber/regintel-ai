@@ -34,7 +34,17 @@ def _print_status(pipeline, config: Config) -> None:
         print(f"              path={config.chroma_path} collection={config.collection_name}")
     print(f"chunks:       {pipeline.chunk_count()}")
     print(f"model:        {config.anthropic_model}")
-    print(f"llm:          {'ready' if pipeline.generator else 'not configured (no ANTHROPIC_API_KEY)'}")
+    # The Anthropic SDK constructs a client even with no key -- it only fails at
+    # request time -- so client construction alone does not prove a key exists.
+    # Check the environment first, or `status` cheerfully reports "ready" and the
+    # user discovers the truth on their first billed call.
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        llm_state = "no ANTHROPIC_API_KEY (retrieval still works)"
+    elif pipeline.generator is not None:
+        llm_state = "ready"
+    else:
+        llm_state = "ANTHROPIC_API_KEY is set, but the client could not be built"
+    print(f"llm:          {llm_state}")
     print(f"chunking:     {config.chunk_tokens} tokens / {config.chunk_overlap_tokens} overlap")
     print(f"top_k:        {config.top_k}")
 
@@ -141,7 +151,7 @@ def main(argv: list[str]) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
 
     p = sub.add_parser("status", help="show the active configuration")
-    p.set_defaults(func=cmd_status, needs_llm=False)
+    p.set_defaults(func=cmd_status, needs_llm=True)
 
     p = sub.add_parser("ingest", help="ingest a PDF or a directory of PDFs")
     p.add_argument("target")
